@@ -1,88 +1,20 @@
 import React, {
-  Ref,
-  RefObject,
   useCallback,
   useEffect,
   useMemo,
   useRef,
   useState,
 } from "react";
-import logo from "./logo.svg";
-import "./App.css";
-import Dropzone from "react-dropzone";
-import { parseSync, Cue, Node } from "subtitle";
-import { playSubtitles } from "./play_subtitles";
-
-const SubtitleDropzone = (props: { onLoad: (result: Node[]) => void }) => {
-  const readSubtitle = (file: File) => {
-    var reader = new FileReader();
-    reader.onload = function (event) {
-      props.onLoad(parseSync(event.target?.result as string));
-    };
-    reader.readAsText(file);
-  };
-
-  return (
-    <Dropzone onDrop={(acceptedFiles) => readSubtitle(acceptedFiles[0])}>
-      {({ getRootProps, getInputProps }) => (
-        <section>
-          <div {...getRootProps()}>
-            <input {...getInputProps()} />
-            <p>Drop subtitle here</p>
-          </div>
-        </section>
-      )}
-    </Dropzone>
-  );
-};
-
-function lowerBound<T>(arr: T[], condition: (r: T) => boolean) {
-  let start = 0;
-  let end = arr.length;
-
-  while (start < end) {
-    let pivot = Math.floor((end + start) / 2);
-    if (condition(arr[pivot])) {
-      end = pivot;
-    } else {
-      start = pivot + 1;
-    }
-  }
-
-  return start;
-}
-
-const getTitle = (t: number, subtitles: Cue[]) => {
-  const current = subtitles[lowerBound(subtitles, (v) => t < v.end)];
-  if (current && t > current.start) {
-    return current.text;
-  } else {
-    return "";
-  }
-};
-
-const doubleDigits = (t: number) => {
-  return t < 10 ? `0${t}` : t.toString();
-};
-
-const TimeStamp = ({ t, dt }: { t: RefObject<number>; dt?: number }) => {
-  const [current, setCurrent] = useState(t.current ?? 0);
-
-  useEffect(() => {
-    const id = setInterval(() => {
-      setCurrent(t.current ?? 0);
-    }, dt ?? 1000 / 60);
-    return () => clearInterval(id);
-  }, [t, dt]);
-
-  return (
-    <div style={{ fontFamily: "monospace" }}>
-      {doubleDigits(Math.floor(current / (1000 * 60)))}:
-      {doubleDigits(Math.floor((current / 1000) % 60))}:
-      {doubleDigits(Math.floor((current / 10) % 100))}
-    </div>
-  );
-};
+import { Cue, Node } from "subtitle";
+import { SubtitleDropzone } from "./components/SubtitleDropzone";
+import { lowerBound } from "./utils/lowerBound";
+import { TimeStamp } from "./components/TimeStamp";
+import { Box } from "./theme/components/box";
+import { ThemeProvider } from "./hooks/theme";
+import { defaultTheme } from "./theme";
+import { Content } from "./theme/components/content";
+import { Scrubbar } from "./components/Scrubbar";
+import { ProcessColors } from "./theme/components/process_colors";
 
 const SubtitlePlayer = ({ subtitles }: { subtitles: Node[] }) => {
   const [update, setUpdate] = useState(0);
@@ -180,9 +112,12 @@ const SubtitlePlayer = ({ subtitles }: { subtitles: Node[] }) => {
   }, [jumpToNext, jumpToPrevious, running]);
 
   return (
-    <div>
+    <>
       <TimeStamp t={tRef} /> {current}
-    </div>
+      <ProcessColors mode="DARKEN_BACKGROUND" >
+        <Scrubbar position={tRef} setPosition={t => setT0(t)} cues={cues} />
+      </ProcessColors>
+    </>
   );
 };
 
@@ -190,15 +125,17 @@ function App() {
   const [subtitles, setSubtitles] = useState<Node[]>();
 
   return (
-    <div className="App">
-      <header className="App-header">
-        {subtitles ? (
-          <SubtitlePlayer subtitles={subtitles} />
-        ) : (
-          <SubtitleDropzone onLoad={setSubtitles} />
-        )}
-      </header>
-    </div>
+    <ThemeProvider theme={defaultTheme}>
+      <Box style={{ minHeight: "100vh" }}>
+        <Content padding="m" style={{ flex: 1 }}>
+          {subtitles ? (
+            <SubtitlePlayer subtitles={subtitles} />
+          ) : (
+            <SubtitleDropzone onLoad={setSubtitles} />
+          )}
+        </Content>
+      </Box>
+    </ThemeProvider>
   );
 }
 
