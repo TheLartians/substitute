@@ -1,20 +1,21 @@
 {
   "files": {
     "main.css": "https://thelartians.de/substitute/static/css/main.b3d43f99.chunk.css",
-    "main.js": "https://thelartians.de/substitute/static/js/main.ec69731b.chunk.js",
-    "main.js.map": "https://thelartians.de/substitute/static/js/main.ec69731b.chunk.js.map",
+    "main.js": "https://thelartians.de/substitute/static/js/main.3d0e7691.chunk.js",
+    "main.js.map": "https://thelartians.de/substitute/static/js/main.3d0e7691.chunk.js.map",
     "runtime-main.js": "https://thelartians.de/substitute/static/js/runtime-main.bc316e75.js",
     "runtime-main.js.map": "https://thelartians.de/substitute/static/js/runtime-main.bc316e75.js.map",
     "static/js/2.e6231021.chunk.js": "https://thelartians.de/substitute/static/js/2.e6231021.chunk.js",
     "static/js/2.e6231021.chunk.js.map": "https://thelartians.de/substitute/static/js/2.e6231021.chunk.js.map",
     "index.html": "https://thelartians.de/substitute/index.html",
     "static/css/main.b3d43f99.chunk.css.map": "https://thelartians.de/substitute/static/css/main.b3d43f99.chunk.css.map",
-    "static/js/2.e6231021.chunk.js.LICENSE.txt": "https://thelartians.de/substitute/static/js/2.e6231021.chunk.js.LICENSE.txt"
+    "static/js/2.e6231021.chunk.js.LICENSE.txt": "https://thelartians.de/substitute/static/js/2.e6231021.chunk.js.LICENSE.txt",
+    "static/media/icon.6c28fcdb.svg": "https://thelartians.de/substitute/static/media/icon.6c28fcdb.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.bc316e75.js",
     "static/js/2.e6231021.chunk.js",
     "static/css/main.b3d43f99.chunk.css",
-    "static/js/main.ec69731b.chunk.js"
+    "static/js/main.3d0e7691.chunk.js"
   ]
 }
