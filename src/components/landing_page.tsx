@@ -26,7 +26,7 @@ export const LandingPage = ({
             alignItems: "center",
           }}
         >
-          <Layout style={{ width: "100%", alignItems: "center" }}>
+          <Layout padding="l" style={{ width: "100%", alignItems: "center" }}>
             <img width={elementSizes.logo} alt="project logo" src={Logo} />
             <Text style={{ textAlign: "center" }} padding="ml" fontSize="xl">
               <Bold>Subs</Bold>titute
@@ -45,23 +45,28 @@ export const LandingPage = ({
           <Layout padding="ml">
             <SubtitleDropzone onLoad={setSubtitles} />
           </Layout>
-          <Layout style={{ alignItems: "flex-start" }}>
+          <Layout style={{ alignItems: "center" }}>
             <Text verticalMargin="m" fontSize="ml">
               <Bold>Usage</Bold>
             </Text>
-            <Text verticalMargin="xs">
-              1. Select a subtitle file (e,g, from{" "}
-              <Link href="https://www.opensubtitles.org">
-                OpenSubtitles.org
-              </Link>
-              )
-            </Text>
-            <Text verticalMargin="xs">
-              2. Use the controls to synchronize the subtitles with the movie
-            </Text>
-            <Text verticalMargin="xs">
-              3. If necessary, adjust the speed or choose adaptive, to respond
-              in real-time
+            <Text verticalMargin="m">
+              <ol>
+                <li>
+                  Select a subtitle file (e.g. from{" "}
+                  <Link href="https://www.opensubtitles.org">
+                    OpenSubtitles.org
+                  </Link>
+                  )
+                </li>
+                <li>
+                  Use the controls to synchronize the current subtitles with the
+                  movie
+                </li>
+                <li>
+                  If necessary, adjust the speed by changing the value or
+                  choosing adaptive speed to synchronize with your changes
+                </li>
+              </ol>
             </Text>
           </Layout>
         </Layout>
