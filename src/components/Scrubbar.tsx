@@ -1,32 +1,17 @@
-import React, {
-  RefObject,
-  useCallback,
-  useEffect,
-  useState,
-  useRef,
-} from "react";
+import React, { useCallback, useEffect, useState, useRef, memo } from "react";
 import { Cue } from "subtitle";
 import { useTheme } from "../hooks/theme";
+import { usePlayer } from "../hooks/player";
 import { Box } from "../theme/components/box";
 
-const ScrubPosition = ({
-  positionRef,
-  setPosition,
-  max,
-}: {
-  positionRef: RefObject<number>;
-  max: number;
-  setPosition: (v: number) => void;
-}) => {
+const ScrubPosition = ({ max }: { max: number }) => {
   const { palette, elementSizes } = useTheme();
+  const player = usePlayer();
   const [pos, setPos] = useState(0);
 
   useEffect(() => {
-    const id = setInterval(() => {
-      setPos((positionRef.current ?? 0) / max);
-    }, 1000 / 60);
-    return () => clearInterval(id);
-  });
+    return player.observe((t) => setPos(t / max));
+  }, [player, max]);
 
   return (
     <div
@@ -42,38 +27,29 @@ const ScrubPosition = ({
   );
 };
 
-export const Scrubbar = ({
-  cues,
-  position,
-  setPosition,
-}: {
-  cues: Cue[];
-  position: RefObject<number>;
-  setPosition: (v: number) => void;
-}) => {
+export const Scrubbar = memo(({ cues }: { cues: Cue[] }) => {
   const { colors, elementSizes } = useTheme();
   const maxT = cues[cues.length - 1]?.end ?? 0;
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const player = usePlayer();
 
   const draw = useCallback(
     (canvas: HTMLCanvasElement) => {
-      if (canvas) {
-        canvas.width = canvas.offsetWidth;
-        canvas.height = canvas.offsetHeight;
-        const ctx = canvas.getContext("2d");
+      canvas.width = canvas.offsetWidth;
+      canvas.height = canvas.offsetHeight;
+      const ctx = canvas.getContext("2d");
 
-        if (ctx) {
-          ctx.clearRect(0, 0, canvas.width, canvas.height);
-          const scale = canvas.width / maxT;
-          ctx.fillStyle = colors.foreground;
-          for (const c of cues) {
-            ctx.fillRect(
-              c.start * scale,
-              0,
-              (c.end - c.start) * scale,
-              canvas.height
-            );
-          }
+      if (ctx) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        const scale = canvas.width / maxT;
+        ctx.fillStyle = colors.foreground;
+        for (const c of cues) {
+          ctx.fillRect(
+            c.start * scale,
+            0,
+            (c.end - c.start) * scale,
+            canvas.height
+          );
         }
       }
     },
@@ -87,14 +63,18 @@ export const Scrubbar = ({
       const mouseListener = (event: MouseEvent) => {
         if (event.buttons === 1) {
           const rect = canvas.getBoundingClientRect();
-          const x = (event.clientX - rect.left) / canvas.width;
-          setPosition(x*maxT);
+          const x = (event.clientX - rect.left) / canvas.offsetWidth;
+          player.set(x * maxT);
         }
       };
       canvas.addEventListener("mousemove", mouseListener);
-      return () => canvas.removeEventListener("mousemove", mouseListener);
+      canvas.addEventListener("mousedown", mouseListener);
+      return () => {
+        canvas.removeEventListener("mousemove", mouseListener);
+        canvas.removeEventListener("mousedown", mouseListener);
+      };
     }
-  }, [draw, setPosition, maxT]);
+  }, [draw, player, maxT]);
 
   return (
     <Box
@@ -106,11 +86,7 @@ export const Scrubbar = ({
         style={{ display: "block" }}
         ref={canvasRef}
       />
-      <ScrubPosition
-        positionRef={position}
-        setPosition={setPosition}
-        max={maxT}
-      />
+      <ScrubPosition max={maxT} />
     </Box>
   );
-};
+});

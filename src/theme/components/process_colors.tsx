@@ -1,5 +1,5 @@
 import Color from "color";
-import React, { ReactNode } from "react";
+import React, { ReactNode, useMemo } from "react";
 
 import { Theme } from "..";
 import { useTheme, ThemeProvider } from "../../hooks/theme";
@@ -58,10 +58,10 @@ export const ProcessColors = ({
 }) => {
   const theme = useTheme();
 
-  const innerTheme = {
+  const innerTheme = useMemo(() => ({
     ...theme,
     colors: processColors(theme.colors, mode, strength),
-  };
+  }), [theme, mode, strength]);
 
   return <ThemeProvider theme={innerTheme}>{children}</ThemeProvider>;
 };
