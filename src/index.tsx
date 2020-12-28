@@ -4,9 +4,11 @@ import "./index.css";
 import App from "./App";
 
 const rootElement = document.getElementById("root");
-const app = <React.StrictMode>
-<App />
-</React.StrictMode>;
+const app = (
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
 
 if (rootElement!.hasChildNodes()) {
   hydrate(app, rootElement);

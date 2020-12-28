@@ -27,7 +27,7 @@ export const Button = styled(Text).attrs({ as: "button" })<
 >`
   transition: 0.25s;
   border: none;
-  border-radius: ${props => getSpacing(props.theme, "m")};
+  border-radius: ${(props) => getSpacing(props.theme, "m")};
   outline-width: 0;
   background-color: ${(props) => props.theme.colors.background};
   opacity: ${(props) => (props.disabled ? 0.5 : 1)};
