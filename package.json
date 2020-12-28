@@ -27,7 +27,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "style": "prettier src/**/*.{ts,tsx}"
+    "style": "prettier src/**/*.{ts,tsx}",
+    "prepare": "./prepare_icons.sh"
   },
   "eslintConfig": {
     "extends": [
