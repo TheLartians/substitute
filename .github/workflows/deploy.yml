@@ -17,12 +17,10 @@ jobs:
           persist-credentials: false
 
       - name: install
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: yarn
 
       - name: build
-        run: PUBLIC_URL="https://thelartians.de/substitute" yarn build
+        run: PUBLIC_URL="/substitute" yarn build
 
       - name: deploy
         uses: JamesIves/github-pages-deploy-action@3.7.1
