@@ -31,8 +31,8 @@ export const LandingPage = ({
             <Text style={{ textAlign: "center" }} padding="ml" fontSize="xl">
               <Bold>Subs</Bold>titute
             </Text>
-            <Text padding="ml" style={{ textAlign: "center" }} fontSize="ml">
-              An external subtitle player for the browser.
+            <Text style={{ textAlign: "center" }} fontSize="ml">
+              A subtitle player for the browser
             </Text>
           </Layout>
           <Text padding="m" style={{ textAlign: "center" }} fontSize="m">
