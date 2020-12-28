@@ -1,7 +1,5 @@
 import React, { useState } from "react";
-import Dropzone from "react-dropzone";
 import { parseSync, Node } from "subtitle";
-import { Box } from "../theme/components/box";
 import { Layout } from "../theme/components/layout";
 import { ProcessColors } from "../theme/components/process_colors";
 import { Bold, Text } from "../theme/components/text";

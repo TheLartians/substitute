@@ -1,5 +1,4 @@
 import { styled } from "./styled";
-import { Input } from "./input";
 import { Text } from "./text";
 import { getCssShadow } from "../shadow";
 import Color from "color";
