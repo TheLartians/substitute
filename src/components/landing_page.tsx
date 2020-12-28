@@ -39,8 +39,8 @@ export const LandingPage = ({
             Using Substitute, you can watch subtitles from an external device,
             such as a smartphone or tablet. This is useful for the rare
             situations where you don't have control over the video source, or
-            don't want to easily adjust subtitle timings without interrupting
-            the movie.
+            want to easily adjust subtitle timings without interrupting the
+            movie.
           </Text>
           <Layout padding="ml">
             <SubtitleDropzone onLoad={setSubtitles} />
