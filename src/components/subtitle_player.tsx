@@ -224,16 +224,22 @@ export const SubtitlePlayer = ({
                       Speed: <SpeedField speed={speed} />
                     </Text>
                     <TextButton
+                      title="Once activated, the speed will automatically be adjusted to match the current subtitle."
                       horizontalMargin="m"
                       onClick={() => setAdaptive(!adaptive)}
                       style={{
                         textDecoration: adaptive ? undefined : "line-through",
                       }}
                       fontSize="s"
+                      fontWeight={adaptive ? "bold" : undefined}
                     >
-                      <Bold>Adaptive</Bold>
+                      Adaptive
                     </TextButton>
-                    <TextButton onClick={resetSpeed} fontSize="s">
+                    <TextButton
+                      title="Sets the speed to 1"
+                      onClick={resetSpeed}
+                      fontSize="s"
+                    >
                       <Bold>Reset</Bold>
                     </TextButton>
                   </Layout>

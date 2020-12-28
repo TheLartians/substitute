@@ -14,6 +14,7 @@ export const Text = styled("span")<
     fontWeight: props.theme.fontWeights[props.fontWeight ?? "normal"],
     color: props.theme.colors.foreground,
     fontSize: props.theme.fontSizes[props.fontSize ?? "m"],
+    lineHeight: props.theme.lineHeight,
   },
 ]);
 

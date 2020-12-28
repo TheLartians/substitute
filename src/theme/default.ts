@@ -10,7 +10,7 @@ export const defaultTheme = {
     icon: 44,
     scrubbar: 30,
     scrubCursor: 2,
-    content: 1024,
+    content: 800,
     logo: 150,
   },
   spacings: {
@@ -23,6 +23,7 @@ export const defaultTheme = {
     xl: 100,
     xxl: 250,
   },
+  lineHeight: 1.5,
   fontSizes: {
     xxs: 10,
     xs: 12,
