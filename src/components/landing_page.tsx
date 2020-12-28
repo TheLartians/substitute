@@ -46,7 +46,7 @@ export const LandingPage = ({
             <SubtitleDropzone onLoad={setSubtitles} />
           </Layout>
           <Layout style={{ alignItems: "center" }}>
-            <Text verticalMargin="m" fontSize="ml">
+            <Text fontSize="ml">
               <Bold>Usage</Bold>
             </Text>
             <Text verticalMargin="m">
