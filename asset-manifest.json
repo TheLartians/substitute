@@ -1,21 +1,21 @@
 {
   "files": {
-    "main.css": "/substitute/static/css/main.b3d43f99.chunk.css",
-    "main.js": "/substitute/static/js/main.ed96e08a.chunk.js",
-    "main.js.map": "/substitute/static/js/main.ed96e08a.chunk.js.map",
+    "main.css": "/substitute/static/css/main.5c36461e.chunk.css",
+    "main.js": "/substitute/static/js/main.b4c4035d.chunk.js",
+    "main.js.map": "/substitute/static/js/main.b4c4035d.chunk.js.map",
     "runtime-main.js": "/substitute/static/js/runtime-main.2b8fec8b.js",
     "runtime-main.js.map": "/substitute/static/js/runtime-main.2b8fec8b.js.map",
     "static/js/2.0cc80427.chunk.js": "/substitute/static/js/2.0cc80427.chunk.js",
     "static/js/2.0cc80427.chunk.js.map": "/substitute/static/js/2.0cc80427.chunk.js.map",
     "index.html": "/substitute/index.html",
-    "static/css/main.b3d43f99.chunk.css.map": "/substitute/static/css/main.b3d43f99.chunk.css.map",
+    "static/css/main.5c36461e.chunk.css.map": "/substitute/static/css/main.5c36461e.chunk.css.map",
     "static/js/2.0cc80427.chunk.js.LICENSE.txt": "/substitute/static/js/2.0cc80427.chunk.js.LICENSE.txt",
     "static/media/icon.6c28fcdb.svg": "/substitute/static/media/icon.6c28fcdb.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.2b8fec8b.js",
     "static/js/2.0cc80427.chunk.js",
-    "static/css/main.b3d43f99.chunk.css",
-    "static/js/main.ed96e08a.chunk.js"
+    "static/css/main.5c36461e.chunk.css",
+    "static/js/main.b4c4035d.chunk.js"
   ]
 }
