@@ -17,8 +17,8 @@ export const LandingPage = ({
   const { elementSizes } = useTheme();
 
   return (
-    <Box style={{ flex: 1 }}>
-      <Content style={{ flex: 1, zIndex: 1 }}>
+    <Box style={{ flex: 1, alignItems: "center" }}>
+      <Content style={{ flex: 1, zIndex: 1, maxWidth: elementSizes.content }}>
         <Layout
           style={{
             flex: 1,
@@ -31,11 +31,20 @@ export const LandingPage = ({
             <Text style={{ textAlign: "center" }} padding="ml" fontSize="xl">
               <Bold>Subs</Bold>titute
             </Text>
-            <Text style={{ textAlign: "center" }} fontSize="ml">
-              An external subtitle player for the browser
+            <Text padding="ml" style={{ textAlign: "center" }} fontSize="ml">
+              An external subtitle player for the browser.
             </Text>
           </Layout>
-          <SubtitleDropzone onLoad={setSubtitles} />
+          <Text padding="m" style={{ textAlign: "center" }} fontSize="m">
+            Using Substitute, you can watch subtitles from an external device,
+            such as a smartphone or tablet. This is useful for the rare
+            situations where you don't have control over the video source, or
+            don't want to easily adjust subtitle timings without interrupting
+            the movie.
+          </Text>
+          <Layout padding="ml">
+            <SubtitleDropzone onLoad={setSubtitles} />
+          </Layout>
           <Layout style={{ alignItems: "flex-start" }}>
             <Text verticalMargin="m" fontSize="ml">
               <Bold>Usage</Bold>
