@@ -11,6 +11,7 @@ export const defaultTheme = {
     scrubbar: 30,
     scrubCursor: 2,
     content: 1024,
+    logo: 150,
   },
   spacings: {
     xxs: 1,

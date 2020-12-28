@@ -6,12 +6,16 @@ import { Layout } from "../theme/components/layout";
 import { Link } from "../theme/components/link";
 import { Box } from "../theme/components/box";
 import { Content } from "../theme/components/content";
+import Logo from "../images/resources/export/icon.svg";
+import { useTheme } from "../hooks/theme";
 
 export const LandingPage = ({
   setSubtitles,
 }: {
   setSubtitles: (subs: Node[]) => void;
 }) => {
+  const { elementSizes } = useTheme();
+
   return (
     <Box style={{ flex: 1 }}>
       <Content style={{ flex: 1, zIndex: 1 }}>
@@ -22,14 +26,16 @@ export const LandingPage = ({
             alignItems: "center",
           }}
         >
-          <Layout style={{ alignItems: "center" }}>
-            <Text padding="m" fontSize="xl">
+          <Layout style={{ width: "100%", alignItems: "center" }}>
+            <img width={elementSizes.logo} alt="project logo" src={Logo} />
+            <Text style={{ textAlign: "center" }} padding="ml" fontSize="xl">
               <Bold>Subs</Bold>titute
             </Text>
-            <Text fontSize="ml">
+            <Text style={{ textAlign: "center" }} fontSize="ml">
               An external subtitle player for the browser
             </Text>
           </Layout>
+          <SubtitleDropzone onLoad={setSubtitles} />
           <Layout style={{ alignItems: "flex-start" }}>
             <Text verticalMargin="m" fontSize="ml">
               <Bold>Usage</Bold>
@@ -49,7 +55,6 @@ export const LandingPage = ({
               in real-time
             </Text>
           </Layout>
-          <SubtitleDropzone onLoad={setSubtitles} />
         </Layout>
       </Content>
     </Box>
