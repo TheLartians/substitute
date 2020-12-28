@@ -4,6 +4,8 @@ import App from "./App";
 
 test("renders learn react link", () => {
   render(<App />);
-  const subtitleElement = screen.getByText(/An external subtitle player for the browser/i);
+  const subtitleElement = screen.getByText(
+    /An external subtitle player for the browser/i
+  );
   expect(subtitleElement).toBeInTheDocument();
 });

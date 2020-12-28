@@ -58,10 +58,13 @@ export const ProcessColors = ({
 }) => {
   const theme = useTheme();
 
-  const innerTheme = useMemo(() => ({
-    ...theme,
-    colors: processColors(theme.colors, mode, strength),
-  }), [theme, mode, strength]);
+  const innerTheme = useMemo(
+    () => ({
+      ...theme,
+      colors: processColors(theme.colors, mode, strength),
+    }),
+    [theme, mode, strength]
+  );
 
   return <ThemeProvider theme={innerTheme}>{children}</ThemeProvider>;
 };

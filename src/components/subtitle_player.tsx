@@ -10,7 +10,6 @@ import { lowerBound } from "../utils/lowerBound";
 import { TimeStamp } from "./time_stamp";
 import { ScrubBar } from "./scrub_bar";
 import { ProcessColors } from "../theme/components/process_colors";
-import { Space } from "../theme/components/space";
 import { Bold, Text } from "../theme/components/text";
 import { usePlayer } from "../hooks/player";
 import { Layout } from "../theme/components/layout";

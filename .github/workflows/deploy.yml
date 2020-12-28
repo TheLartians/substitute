@@ -3,7 +3,7 @@ name: Build
 on:
   push:
     branches:
-      - source
+      - main
 
 jobs:
   deploy:
@@ -28,6 +28,6 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@3.7.1
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          BRANCH: master
+          BRANCH: gh-pages
           FOLDER: build
           CLEAN: true

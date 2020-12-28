@@ -27,8 +27,10 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "style": "prettier src/**/*.{ts,tsx}",
-    "prepare": "./prepare_icons.sh"
+    "style": "prettier \"src/**/*.{ts,tsx}\"",
+    "lint": "eslint src",
+    "prepare": "./prepare_icons.sh",
+    "postbuild": "react-snap"
   },
   "eslintConfig": {
     "extends": [
@@ -52,6 +54,7 @@
     "@types/color": "^3.0.1",
     "@types/styled-components": "^5.1.7",
     "prettier": "^2.2.1",
+    "react-snap": "^1.23.0",
     "ts-node": "^9.1.1"
   }
 }

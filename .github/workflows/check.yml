@@ -3,10 +3,10 @@ name: Build
 on:
   push:
     branches:
-      - source
+      - main
   pull_request:
     branches:
-      - source
+      - main
 
 jobs:
   check:
@@ -26,4 +26,4 @@ jobs:
         run: yarn tsc -p . --noEmit
 
       - name: check style and linting
-        run: yarn style && yarn lint
+        run: yarn style --check && yarn lint
