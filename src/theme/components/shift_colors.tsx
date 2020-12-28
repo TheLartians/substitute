@@ -23,10 +23,10 @@ export const ShiftColors = ({
       ...theme.colors,
       background: background
         ? theme.palette[background]
-        : theme.colors.foreground,
+        : theme.colors.background,
       foreground: foreground
         ? theme.palette[foreground]
-        : theme.colors.background,
+        : theme.colors.foreground,
     },
   };
 

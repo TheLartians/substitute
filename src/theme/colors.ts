@@ -2,8 +2,8 @@ export const palette = {
   blue: "rgb(98,135,161)",
   black: "black",
   white: "white",
-  dark: "#1e2021",
+  dark: "#111111",
   darkBlue: "#0a6bab",
-  lightGray: "#EEEEEE",
+  lightGray: "#CCCCCC",
   red: "red",
 };

@@ -1,28 +1,30 @@
-import React, {
-  useState,
-} from "react";
+import React, { useMemo, useState } from "react";
 import { Node } from "subtitle";
-import { SubtitleDropzone } from "./components/SubtitleDropzone";
-import { Box } from "./theme/components/box";
 import { ThemeProvider } from "./hooks/theme";
 import { defaultTheme } from "./theme";
-import { Content } from "./theme/components/content";
-import { SubtitlePlayer } from "./components/SubtitlePlayer";
+import { SubtitlePlayer } from "./components/subtitle_player";
+import { PlayerProvider, Player } from "./hooks/player";
+import { LandingPage } from "./components/landing_page";
 
 function App() {
   const [subtitles, setSubtitles] = useState<Node[]>();
 
+  const player = useMemo(() => { 
+    return subtitles ? new Player() : undefined;
+  }, [subtitles]);
+
   return (
     <ThemeProvider theme={defaultTheme}>
-      <Box style={{ minHeight: "100vh" }}>
-        <Content padding="m" style={{ flex: 1 }}>
           {subtitles ? (
-            <SubtitlePlayer subtitles={subtitles} />
+            <PlayerProvider value={player!}>
+              <SubtitlePlayer
+                close={() => setSubtitles(undefined)}
+                subtitles={subtitles}
+              />
+            </PlayerProvider>
           ) : (
-            <SubtitleDropzone onLoad={setSubtitles} />
+            <LandingPage setSubtitles={setSubtitles}/>
           )}
-        </Content>
-      </Box>
     </ThemeProvider>
   );
 }

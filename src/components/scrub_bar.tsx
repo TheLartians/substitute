@@ -27,7 +27,7 @@ const ScrubPosition = ({ max }: { max: number }) => {
   );
 };
 
-export const Scrubbar = memo(({ cues }: { cues: Cue[] }) => {
+export const ScrubBar = memo(({ cues }: { cues: Cue[] }) => {
   const { colors, elementSizes } = useTheme();
   const maxT = cues[cues.length - 1]?.end ?? 0;
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -38,7 +38,6 @@ export const Scrubbar = memo(({ cues }: { cues: Cue[] }) => {
       canvas.width = canvas.offsetWidth;
       canvas.height = canvas.offsetHeight;
       const ctx = canvas.getContext("2d");
-
       if (ctx) {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         const scale = canvas.width / maxT;
@@ -60,6 +59,7 @@ export const Scrubbar = memo(({ cues }: { cues: Cue[] }) => {
     const canvas = canvasRef.current;
     if (canvas) {
       draw(canvas);
+
       const mouseListener = (event: MouseEvent) => {
         if (event.buttons === 1) {
           const rect = canvas.getBoundingClientRect();
@@ -67,11 +67,24 @@ export const Scrubbar = memo(({ cues }: { cues: Cue[] }) => {
           player.set(x * maxT);
         }
       };
+      const touchListener = (event: TouchEvent) => {
+        const rect = canvas.getBoundingClientRect();
+        const x = (event.touches[0].clientX - rect.left) / canvas.offsetWidth;
+        player.set(Math.min(Math.max(x, 0), 1) * maxT);
+      };
+      const resizeListener = () => draw(canvas);
+
+      window.addEventListener("resize", resizeListener);
       canvas.addEventListener("mousemove", mouseListener);
       canvas.addEventListener("mousedown", mouseListener);
+      canvas.addEventListener("touchmove", touchListener);
+      canvas.addEventListener("touchstart", touchListener);
       return () => {
+        window.removeEventListener("resize", resizeListener);
         canvas.removeEventListener("mousemove", mouseListener);
         canvas.removeEventListener("mousedown", mouseListener);
+        canvas.removeEventListener("touchstart", touchListener);
+        canvas.removeEventListener("touchmove", touchListener);
       };
     }
   }, [draw, player, maxT]);
@@ -79,7 +92,12 @@ export const Scrubbar = memo(({ cues }: { cues: Cue[] }) => {
   return (
     <Box
       borderRadius="m"
-      style={{ position: "relative", width: "100%", overflow: "hidden" }}
+      style={{
+        position: "relative",
+        width: "100%",
+        overflow: "hidden",
+        cursor: "pointer",
+      }}
     >
       <canvas
         height={elementSizes.scrubbar}

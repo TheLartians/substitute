@@ -17,6 +17,14 @@ export const Text = styled("span")<
   },
 ]);
 
+export const Bold = styled("span")(props=> ({
+  fontWeight: props.theme.fontWeights["bold"]
+}))
+
+export const Monospace = styled("span")(props=> ({
+  fontFamily: "monospace"
+}))
+
 export const ShadowedText = styled(Text)<{
   shadowOffset?: Spacing;
   shadowSpread?: Spacing;

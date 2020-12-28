@@ -1,18 +1,13 @@
 import { Layout } from "./layout";
 import { styled } from "./styled";
 
-export const Content = styled(Layout)((props) => ({
-  maxWidth: props.theme.elementSizes.content,
-  margin: "auto",
-  width: "100%",
-  alignItems: "center",
-  justifyContent: "center"
-}));
-
-export const InnerContent = styled(Layout).attrs({
-  verticalMargin: "xl",
+export const Content = styled(Layout).attrs({
+  verticalMargin: "m",
   horizontalMargin: "m",
-})`
-  padding-left: env(safe-area-inset-left);
-  padding-right: env(safe-area-inset-right);
-`;
+})(props => ({
+  paddingLeft: "env(safe-area-inset-left)",
+  paddingRight: "env(safe-area-inset-right)",
+  paddingTop: "env(safe-area-inset-top)",
+  paddingBottom: "env(safe-area-inset-bottom)",
+}))
+

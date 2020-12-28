@@ -1,9 +1,9 @@
 import { createContext, useContext } from "react";
-import { requestAnimationInterval } from "./animationInterval";
+import { requestAnimationInterval } from "./animation_interval";
 
 type Observer = (t: number) => void;
 
-class Player {
+export class Player {
   public t: number;
   public running = false;
 
@@ -30,18 +30,21 @@ class Player {
     }
   }
 
-  public pause() {
+  public pause(broadcast = true) {
     this.stopCallback?.();
     this.stopCallback = undefined;
     this.running = false;
     this.t0 = this.t;
+    if (broadcast) {
+      this.broadcast();
+    }
   }
 
   public set(t: number, v = this.v) {
     this.t = t;
     this.v = v;
     if (this.running) {
-      this.pause();
+      this.pause(false);
       this.start();
     } else {
       this.t0 = t;

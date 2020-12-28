@@ -3,12 +3,12 @@ import { palette } from "./colors";
 export const defaultTheme = {
   palette,
   colors: {
-    foreground: palette.white,
-    background: palette.blue,
+    foreground: palette.lightGray,
+    background: palette.dark,
   },
   elementSizes: {
     icon: 44,
-    scrubbar: 50,
+    scrubbar: 30,
     scrubCursor: 2,
     content: 1024,
   },
