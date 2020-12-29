@@ -9,14 +9,15 @@ import { LandingPage } from "./components/landing_page";
 function App() {
   const [subtitles, setSubtitles] = useState<Node[]>();
 
-  const player = useMemo(() => {
+  // use a new timer instance for every subtitle file
+  const timer = useMemo(() => {
     return subtitles ? new Timer() : undefined;
   }, [subtitles]);
 
   return (
     <ThemeProvider theme={defaultTheme}>
       {subtitles ? (
-        <TimerProvider value={player!}>
+        <TimerProvider value={timer!}>
           <SubtitlePlayer
             close={() => setSubtitles(undefined)}
             subtitles={subtitles}
