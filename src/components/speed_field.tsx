@@ -1,11 +1,11 @@
 import React, { FormEvent, useEffect, useRef, useState } from "react";
 import { Monospace } from "../theme/components/text";
-import { usePlayer } from "../hooks/player";
+import { useTimer } from "../hooks/timer";
 import { Input } from "../theme/components/input";
 import { useTheme } from "../hooks/theme";
 
 export const SpeedField = ({ speed }: { speed: number }) => {
-  const player = usePlayer();
+  const timer = useTimer();
   const [editable, setEditable] = useState(false);
   const [speedStr, setSpeedStr] = useState("");
   const [prevSpeed, setPrevSpeed] = useState(speed);
@@ -27,7 +27,7 @@ export const SpeedField = ({ speed }: { speed: number }) => {
         if (event.key === "Enter") {
           const v = Number.parseFloat(speedStr);
           if (isFinite(v)) {
-            player.set(player.t, v);
+            timer.set(timer.t, v);
           }
           setEditable(false);
         }
@@ -35,7 +35,7 @@ export const SpeedField = ({ speed }: { speed: number }) => {
       input.addEventListener("keyup", eventListener);
       return () => input.removeEventListener("keyup", eventListener);
     }
-  }, [speedStr, player]);
+  }, [speedStr, timer]);
 
   if (editable) {
     return (

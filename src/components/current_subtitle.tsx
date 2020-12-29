@@ -2,18 +2,18 @@ import React, { useEffect, useState } from "react";
 import { Cue } from "subtitle";
 import { lowerBound } from "../utils/lowerBound";
 import { Text } from "../theme/components/text";
-import { usePlayer } from "../hooks/player";
+import { useTimer } from "../hooks/timer";
 
 export const CurrentSubtitle = ({ cues }: { cues: Cue[] }) => {
   const [current, setCurrent] = useState("");
-  const player = usePlayer();
+  const timer = useTimer();
 
   useEffect(() => {
-    return player.observe((t) => {
+    return timer.observe((t) => {
       const currentCue = cues[lowerBound(cues, (v) => t < v.end)];
       setCurrent(currentCue && t >= currentCue.start ? currentCue.text : "");
     });
-  }, [player, cues]);
+  }, [timer, cues]);
 
   return (
     <Text style={{ textAlign: "center" }} fontSize="xxl">

@@ -3,25 +3,25 @@ import { Node } from "subtitle";
 import { ThemeProvider } from "./hooks/theme";
 import { defaultTheme } from "./theme";
 import { SubtitlePlayer } from "./components/subtitle_player";
-import { PlayerProvider, Player } from "./hooks/player";
+import { TimerProvider, Timer } from "./hooks/timer";
 import { LandingPage } from "./components/landing_page";
 
 function App() {
   const [subtitles, setSubtitles] = useState<Node[]>();
 
   const player = useMemo(() => {
-    return subtitles ? new Player() : undefined;
+    return subtitles ? new Timer() : undefined;
   }, [subtitles]);
 
   return (
     <ThemeProvider theme={defaultTheme}>
       {subtitles ? (
-        <PlayerProvider value={player!}>
+        <TimerProvider value={player!}>
           <SubtitlePlayer
             close={() => setSubtitles(undefined)}
             subtitles={subtitles}
           />
-        </PlayerProvider>
+        </TimerProvider>
       ) : (
         <LandingPage setSubtitles={setSubtitles} />
       )}

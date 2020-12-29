@@ -1,17 +1,17 @@
 import React, { useCallback, useEffect, useState, useRef, memo } from "react";
 import { Cue } from "subtitle";
 import { useTheme } from "../hooks/theme";
-import { usePlayer } from "../hooks/player";
+import { useTimer } from "../hooks/timer";
 import { Box } from "../theme/components/box";
 
 const ScrubPosition = ({ max }: { max: number }) => {
   const { palette, elementSizes } = useTheme();
-  const player = usePlayer();
+  const timer = useTimer();
   const [pos, setPos] = useState(0);
 
   useEffect(() => {
-    return player.observe((t) => setPos(t / max));
-  }, [player, max]);
+    return timer.observe((t) => setPos(t / max));
+  }, [timer, max]);
 
   return (
     <div
@@ -31,7 +31,7 @@ export const ScrubBar = memo(({ cues }: { cues: Cue[] }) => {
   const { colors, elementSizes } = useTheme();
   const maxT = cues[cues.length - 1]?.end ?? 0;
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const player = usePlayer();
+  const timer = useTimer();
 
   const draw = useCallback(
     (canvas: HTMLCanvasElement) => {
@@ -64,13 +64,13 @@ export const ScrubBar = memo(({ cues }: { cues: Cue[] }) => {
         if (event.buttons === 1) {
           const rect = canvas.getBoundingClientRect();
           const x = (event.clientX - rect.left) / canvas.offsetWidth;
-          player.set(x * maxT);
+          timer.set(x * maxT);
         }
       };
       const touchListener = (event: TouchEvent) => {
         const rect = canvas.getBoundingClientRect();
         const x = (event.touches[0].clientX - rect.left) / canvas.offsetWidth;
-        player.set(Math.min(Math.max(x, 0), 1) * maxT);
+        timer.set(Math.min(Math.max(x, 0), 1) * maxT);
       };
       const resizeListener = () => draw(canvas);
 
@@ -87,7 +87,7 @@ export const ScrubBar = memo(({ cues }: { cues: Cue[] }) => {
         canvas.removeEventListener("touchmove", touchListener);
       };
     }
-  }, [draw, player, maxT]);
+  }, [draw, timer, maxT]);
 
   return (
     <Box

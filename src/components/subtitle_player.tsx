@@ -11,7 +11,7 @@ import { TimeStamp } from "./time_stamp";
 import { ScrubBar } from "./scrub_bar";
 import { ProcessColors } from "../theme/components/process_colors";
 import { Bold, Text } from "../theme/components/text";
-import { usePlayer } from "../hooks/player";
+import { useTimer } from "../hooks/timer";
 import { Layout } from "../theme/components/layout";
 import { TextButton } from "../theme/components/button";
 import {
@@ -36,9 +36,9 @@ export const SubtitlePlayer = ({
   subtitles: Node[];
   close: () => void;
 }) => {
-  const player = usePlayer();
-  const [running, setRunning] = useState(player.running);
-  const [speed, setSpeed] = useState(player.v);
+  const timer = useTimer();
+  const [running, setRunning] = useState(timer.running);
+  const [speed, setSpeed] = useState(timer.v);
   const [adaptive, setAdaptive] = useState(false);
   const [fullScreen, setFullScreen] = useState(false);
   const startTime = useRef<[number, number]>();
@@ -68,42 +68,42 @@ export const SubtitlePlayer = ({
   useEffect(() => {
     const max = cues[cues.length - 1].end;
 
-    return player.observe((t) => {
-      setRunning(player.running);
-      setSpeed(player.v);
-      if (player.running && t >= max) {
-        player.pause();
+    return timer.observe((t) => {
+      setRunning(timer.running);
+      setSpeed(timer.v);
+      if (timer.running && t >= max) {
+        timer.pause();
       }
     });
-  }, [player, cues]);
+  }, [timer, cues]);
 
   const adaptSpeed = useCallback(() => {
     if (adaptive && running) {
       if (startTime.current) {
         const v =
-          (player.t - startTime.current[1]) /
+          (timer.t - startTime.current[1]) /
           (Date.now() - startTime.current[0]);
         if (v > 0) {
-          player.set(player.t, v);
+          timer.set(timer.t, v);
         }
       } else {
-        startTime.current = [Date.now(), player.t];
+        startTime.current = [Date.now(), timer.t];
       }
     } else {
       startTime.current = undefined;
     }
-  }, [adaptive, running, player]);
+  }, [adaptive, running, timer]);
 
   const resetSpeed = useCallback(() => {
-    player.set(player.t, 1);
+    timer.set(timer.t, 1);
     startTime.current = undefined;
     adaptSpeed();
-  }, [adaptSpeed, player]);
+  }, [adaptSpeed, timer]);
 
   useEffect(adaptSpeed, [adaptSpeed]);
 
   const jumpToNext = useCallback(() => {
-    const t = player.t;
+    const t = timer.t;
     const currentCue =
       cues[
         Math.min(
@@ -111,17 +111,17 @@ export const SubtitlePlayer = ({
           lowerBound(cues, (v) => t < v.start)
         )
       ];
-    player.set(currentCue.start);
+    timer.set(currentCue.start);
     adaptSpeed();
-  }, [cues, player, adaptSpeed]);
+  }, [cues, timer, adaptSpeed]);
 
   const jumpToPrevious = useCallback(() => {
-    const t = player.t;
+    const t = timer.t;
     const currentCue =
       cues[Math.max(0, lowerBound(cues, (v) => t < v.end) - 1)];
-    player.set(currentCue.start);
+    timer.set(currentCue.start);
     adaptSpeed();
-  }, [cues, player, adaptSpeed]);
+  }, [cues, timer, adaptSpeed]);
 
   useEffect(() => {
     const listener = (event: KeyboardEvent) => {
@@ -133,10 +133,10 @@ export const SubtitlePlayer = ({
           jumpToNext();
           break;
         case " ":
-          if (player.running) {
-            player.pause();
+          if (timer.running) {
+            timer.pause();
           } else {
-            player.start();
+            timer.start();
           }
           break;
       }
@@ -144,7 +144,7 @@ export const SubtitlePlayer = ({
 
     document.addEventListener("keydown", listener);
     return () => document.removeEventListener("keydown", listener);
-  }, [jumpToNext, jumpToPrevious, player]);
+  }, [jumpToNext, jumpToPrevious, timer]);
 
   return (
     <ShiftColors background={fullScreen ? "black" : undefined}>
@@ -179,7 +179,7 @@ export const SubtitlePlayer = ({
 
                 <TextButton
                   onClick={() =>
-                    player.running ? player.pause() : player.start()
+                    timer.running ? timer.pause() : timer.start()
                   }
                   fontSize="xl"
                 >
