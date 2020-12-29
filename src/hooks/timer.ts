@@ -3,7 +3,7 @@ import { requestAnimationInterval } from "./animation_interval";
 
 type Observer = (t: number) => void;
 
-export class Player {
+export class Timer {
   public t: number;
   public running = false;
 
@@ -60,7 +60,7 @@ export class Player {
   }
 }
 
-const PlayerContext = createContext(new Player());
+const TimerContext = createContext(new Timer());
 
-export const PlayerProvider = PlayerContext.Provider;
-export const usePlayer = () => useContext(PlayerContext);
+export const TimerProvider = TimerContext.Provider;
+export const useTimer = () => useContext(TimerContext);
