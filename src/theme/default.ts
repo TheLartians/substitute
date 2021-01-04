@@ -12,6 +12,7 @@ export const defaultTheme = {
     scrubCursor: 2,
     content: 800,
     logo: 150,
+    screenshot: 500,
   },
   spacings: {
     xxs: 1,

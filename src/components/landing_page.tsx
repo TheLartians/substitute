@@ -10,6 +10,7 @@ import Logo from "../images/resources/export/icon.svg";
 import { useTheme } from "../hooks/theme";
 import { FaGithub } from "react-icons/fa";
 import { TextButton } from "../theme/components/button";
+import screenshot from "../images/screenshot.png";
 
 export const LandingPage = ({
   setSubtitles,
@@ -28,7 +29,7 @@ export const LandingPage = ({
             alignItems: "center",
           }}
         >
-          <Layout padding="l" style={{ width: "100%", alignItems: "center" }}>
+          <Layout margin="l" style={{ width: "100%", alignItems: "center" }}>
             <img width={elementSizes.logo} alt="project logo" src={Logo} />
             <Text style={{ textAlign: "center" }} padding="ml" fontSize="xl">
               <Bold>Subs</Bold>titute
@@ -37,15 +38,26 @@ export const LandingPage = ({
               A subtitle player for the browser
             </Text>
           </Layout>
-          <Text padding="m" style={{ textAlign: "center" }} fontSize="m">
+          <Layout margin="ml">
+            <SubtitleDropzone onLoad={setSubtitles} />
+          </Layout>
+          <Text margin="m" style={{ textAlign: "center" }} fontSize="m">
             Using Substitute, you can watch subtitles from an external device,
             such as a smartphone or tablet. This is useful for the rare
             situations where you don't have control over the video source, or
             want to easily adjust subtitle timings without interrupting the
             movie.
           </Text>
-          <Layout padding="ml">
-            <SubtitleDropzone onLoad={setSubtitles} />
+          <Layout horizontalMargin="m" verticalMargin="l">
+            <img
+              src={screenshot}
+              alt="Screenshot of a mobile device using Substitute"
+              style={{
+                maxWidth: elementSizes.screenshot,
+                width: "100%",
+                objectFit: "contain",
+              }}
+            />
           </Layout>
           <Layout style={{ alignItems: "center" }}>
             <Text fontSize="ml">
