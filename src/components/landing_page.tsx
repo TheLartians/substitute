@@ -16,7 +16,7 @@ export const LandingPage = ({
 }: {
   setSubtitles: (subs: Node[]) => void;
 }) => {
-  const { elementSizes, colors } = useTheme();
+  const { elementSizes } = useTheme();
 
   return (
     <Box style={{ flex: 1, alignItems: "center" }}>
