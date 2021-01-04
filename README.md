@@ -1,6 +1,8 @@
+<br />
 <p align="center">
-<img height="250" src="resources/export/icon.svg"/>
+  <img height="250" src="resources/export/icon.svg"/>
 </p>
+<br />
 
 # Substitute
 
@@ -9,6 +11,12 @@ View live at [thelartians.de/substitute](https://thelartians.de/substitute).
 ## About
 
 Substitute is a browser subtitle viewer, that allows you to watch subtitles from an external device, such as a smartphone or tablet. This is useful for situations where you don't have control over the video source, or want to easily adjust subtitle timings without interrupting the movie.
+
+<br />
+<p align="center">
+  <img height="250" src="src/images/screenshot.png"/>
+</p>
+<br />
 
 ## How to use
 
