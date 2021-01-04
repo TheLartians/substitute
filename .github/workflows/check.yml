@@ -31,4 +31,4 @@ jobs:
         run: yarn tsc -p . --noEmit
 
       - name: check style and linting
-        run: yarn style --check && yarn lint
+        run: yarn style --check && yarn lint --max-warnings 0
