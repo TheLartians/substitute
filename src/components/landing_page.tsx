@@ -8,13 +8,15 @@ import { Box } from "../theme/components/box";
 import { Content } from "../theme/components/content";
 import Logo from "../images/resources/export/icon.svg";
 import { useTheme } from "../hooks/theme";
+import { FaGithub } from "react-icons/fa";
+import { TextButton } from "../theme/components/button";
 
 export const LandingPage = ({
   setSubtitles,
 }: {
   setSubtitles: (subs: Node[]) => void;
 }) => {
-  const { elementSizes } = useTheme();
+  const { elementSizes, colors } = useTheme();
 
   return (
     <Box style={{ flex: 1, alignItems: "center" }}>
@@ -69,6 +71,9 @@ export const LandingPage = ({
               </ol>
             </Text>
           </Layout>
+          <TextButton as="a" href="https://github.com/thelartians/substitute">
+            <FaGithub size={elementSizes.icon} />
+          </TextButton>
         </Layout>
       </Content>
     </Box>
