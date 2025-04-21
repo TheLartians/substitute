@@ -8,14 +8,17 @@ import { Box } from "../theme/components/box";
 import { Content } from "../theme/components/content";
 import Logo from "../images/resources/export/icon.svg";
 import { useTheme } from "../hooks/theme";
-import { FaGithub } from "react-icons/fa";
+import { FaGithub, FaMoon, FaSun } from "react-icons/fa";
 import { TextButton } from "../theme/components/button";
 import screenshot from "../images/screenshot.png";
+import { Theme } from "../theme";
 
 export const LandingPage = ({
   setSubtitles,
+  setTheme,
 }: {
   setSubtitles: (subs: Node[]) => void;
+  setTheme: (theme: "light" | "dark") => void;
 }) => {
   const { elementSizes } = useTheme();
 
@@ -83,7 +86,36 @@ export const LandingPage = ({
               </ol>
             </Text>
           </Layout>
-          <TextButton as="a" href="https://github.com/thelartians/substitute">
+          <Layout style={{ alignItems: "center" }}>
+            <Text fontSize="ml">
+              <Bold>Theme</Bold>
+            </Text>
+            <Layout style={{ flexDirection: "row" }}>
+              <TextButton
+                margin="m"
+                style={{ textAlign: "center" }}
+                onClick={() => setTheme("light")}
+              >
+                <FaSun />
+                <br />
+                <Bold>Light mode</Bold>
+              </TextButton>
+              <TextButton
+                margin="m"
+                style={{ textAlign: "center" }}
+                onClick={() => setTheme("dark")}
+              >
+                <FaMoon />
+                <br />
+                <Bold>Dark mode</Bold>
+              </TextButton>
+            </Layout>
+          </Layout>
+          <TextButton
+            verticalMargin="l"
+            as="a"
+            href="https://github.com/thelartians/substitute"
+          >
             <FaGithub size={elementSizes.icon} />
           </TextButton>
         </Layout>

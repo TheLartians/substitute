@@ -45,3 +45,19 @@ export const defaultTheme = {
     mobileS: 350,
   },
 };
+
+export const lightTheme: typeof defaultTheme = {
+  ...defaultTheme,
+  colors: {
+    background: palette.veryLightGray,
+    foreground: palette.dark,
+  },
+};
+
+export const darkTheme: typeof defaultTheme = {
+  ...defaultTheme,
+  colors: {
+    foreground: palette.lightGray,
+    background: palette.dark,
+  },
+};

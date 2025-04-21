@@ -10,6 +10,7 @@ const processColors = (
     | "INVERT"
     | "DARKEN_BACKGROUND"
     | "LIGHTEN_BACKGROUND"
+    | "INCREASE_CONTRAST"
     | "NONE"
     | "MAKE_TRANSPARENT",
   strength = 1
@@ -44,6 +45,18 @@ const processColors = (
           .alpha(strength * 0.5)
           .toString(),
       };
+    case "INCREASE_CONTRAST":
+      if (Color(background).isDark()) {
+        return {
+          foreground: Color(foreground).lighten(0.1).toString(),
+          background: Color(background).darken(0.1).toString(),
+        };
+      } else {
+        return {
+          foreground: Color(foreground).darken(strength).toString(),
+          background: Color(background).lighten(strength).toString(),
+        };
+      }
   }
 };
 

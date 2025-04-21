@@ -7,6 +7,8 @@ export interface BaseProps {
   margin?: Spacing;
   horizontalMargin?: Spacing;
   verticalMargin?: Spacing;
+  rowGap?: Spacing;
+  columnGap?: Spacing;
 }
 
 export const baseStyle = (props: BaseProps & { theme: Theme }) =>
@@ -21,4 +23,6 @@ export const baseStyle = (props: BaseProps & { theme: Theme }) =>
     marginRight: getSpacing(props.theme, props.horizontalMargin),
     marginTop: getSpacing(props.theme, props.verticalMargin),
     marginBottom: getSpacing(props.theme, props.verticalMargin),
+    rowGap: getSpacing(props.theme, props.rowGap),
+    columnGap: getSpacing(props.theme, props.columnGap),
   } as const);

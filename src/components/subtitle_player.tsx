@@ -28,6 +28,7 @@ import { ShiftColors } from "../theme/components/shift_colors";
 import { SpeedField } from "./speed_field";
 import { Box } from "../theme/components/box";
 import { Content } from "../theme/components/content";
+import { Theme } from "../theme";
 
 export const SubtitlePlayer = ({
   subtitles,
@@ -147,7 +148,7 @@ export const SubtitlePlayer = ({
   }, [jumpToNext, jumpToPrevious, timer]);
 
   return (
-    <ShiftColors background={fullScreen ? "black" : undefined}>
+    <ProcessColors mode={fullScreen ? "INCREASE_CONTRAST" : "NONE"}>
       <Box style={{ flex: 1 }}>
         <Content style={{ flex: 1 }}>
           <Layout
@@ -201,11 +202,9 @@ export const SubtitlePlayer = ({
               </Layout>
             )}
 
-            <ShiftColors foreground="white">
-              <Layout style={{ flex: 1, justifyContent: "center" }}>
-                <CurrentSubtitle cues={cues} />
-              </Layout>
-            </ShiftColors>
+            <Layout style={{ flex: 1, justifyContent: "center" }}>
+              <CurrentSubtitle cues={cues} />
+            </Layout>
 
             {!fullScreen && (
               <>
@@ -219,13 +218,13 @@ export const SubtitlePlayer = ({
                   <TimeStamp />
                   <Layout
                     style={{ flexDirection: "row", alignItems: "center" }}
+                    columnGap="m"
                   >
                     <Text>
                       Speed: <SpeedField speed={speed} />
                     </Text>
                     <TextButton
                       title="Once activated, the speed will automatically be adjusted to match the current subtitle."
-                      horizontalMargin="m"
                       onClick={() => setAdaptive(!adaptive)}
                       style={{
                         textDecoration: adaptive ? undefined : "line-through",
@@ -253,6 +252,6 @@ export const SubtitlePlayer = ({
           </Layout>
         </Content>
       </Box>
-    </ShiftColors>
+    </ProcessColors>
   );
 };
