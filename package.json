@@ -57,5 +57,12 @@
     "prettier": "^2.2.1",
     "react-snap": "^1.23.0",
     "ts-node": "^9.1.1"
-  }
+  },
+  "reactSnap": {
+    "puppeteerArgs": [
+      "--no-sandbox",
+      "--disable-setuid-sandbox",
+      "--disable-dev-shm-usage",
+      "--single-process"
+  ]}
 }
