@@ -29,6 +29,9 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: yarn
 
+      - name: build
+        run: PUBLIC_URL="/substitute" yarn build
+
       - name: check types
         run: yarn tsc -p . --noEmit
 
