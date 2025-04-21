@@ -17,6 +17,8 @@ jobs:
 
       - uses: actions/checkout@v4
 
+      - uses: mfinelli/setup-imagemagick@v6
+
       - uses: actions/cache@v4
         with:
           path: '**/node_modules'
