@@ -1,9 +1,8 @@
 
 if [ ! -f public/favicon.ico ]; then
   ICON=$(pwd)/resources/export/icon.svg
-  echo "generating icons from ${ICON}"
-  convert -density 384 -background none ${ICON} -define icon:auto-resize public/favicon.ico
-  convert -density 512x512 -background none -resize 512x512 ${ICON} public/logo512.png
-  convert -density 512x512 -background none -resize 192x192 ${ICON} public/logo192.png
-  convert -density 512x512 -resize 1200x627 -background white ${ICON} public/preview.jpg
+  magick -density 384 ${ICON} -background none -define icon:auto-resize public/favicon.ico
+  magick -density 512x512 ${ICON} -background none -resize 512x512 public/logo512.png
+  magick -density 512x512 ${ICON} -background none -resize 192x192 public/logo192.png
+  magick -density 512x512 ${ICON} -resize 1200x627 -background white public/preview.jpg
 fi

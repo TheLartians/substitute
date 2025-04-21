@@ -5,6 +5,9 @@ on:
     branches:
       - main
 
+permissions:
+  contents: write
+
 jobs:
   deploy:
 
@@ -12,11 +15,13 @@ jobs:
     
     steps:
 
-      - uses: actions/checkout@v2.3.1
+      - uses: actions/checkout@v4
         with:
           persist-credentials: false
 
-      - uses: actions/cache@v2
+      - uses: mfinelli/setup-imagemagick@v6
+
+      - uses: actions/cache@v4
         with:
           path: '**/node_modules'
           key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
@@ -28,9 +33,8 @@ jobs:
         run: PUBLIC_URL="/substitute" yarn build
 
       - name: deploy
-        uses: JamesIves/github-pages-deploy-action@3.7.1
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          BRANCH: gh-pages
-          FOLDER: build
-          CLEAN: true
+          branch: gh-pages
+          folder: build
+          clean: true
