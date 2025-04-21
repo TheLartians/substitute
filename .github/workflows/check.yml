@@ -19,10 +19,10 @@ jobs:
 
       - uses: mfinelli/setup-imagemagick@v6
 
-      - uses: actions/cache@v4
+      - uses: actions/setup-node@v4
         with:
-          path: '**/node_modules'
-          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+          node-version-file: '.nvmrc'
+          cache: yarn
 
       - name: install
         env:
