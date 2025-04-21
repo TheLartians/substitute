@@ -24,11 +24,9 @@ import {
 import { CurrentSubtitle } from "./current_subtitle";
 import NoSleep from "nosleep.js";
 import { AiOutlineFullscreenExit, AiOutlineFullscreen } from "react-icons/ai";
-import { ShiftColors } from "../theme/components/shift_colors";
 import { SpeedField } from "./speed_field";
 import { Box } from "../theme/components/box";
 import { Content } from "../theme/components/content";
-import { Theme } from "../theme";
 
 export const SubtitlePlayer = ({
   subtitles,

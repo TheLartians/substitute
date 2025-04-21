@@ -11,7 +11,6 @@ import { useTheme } from "../hooks/theme";
 import { FaGithub, FaMoon, FaSun } from "react-icons/fa";
 import { TextButton } from "../theme/components/button";
 import screenshot from "../images/screenshot.png";
-import { Theme } from "../theme";
 
 export const LandingPage = ({
   setSubtitles,
